@@ -1,0 +1,11 @@
+export const HOME_PAGE_ROUTE = '/';
+export const NEWS_PAGE_ROUTE = '/news/:id';
+export const CATEGORIES_PAGE_ROUTE = '/categories';
+export const KHNGLDI_PAGE_ROUTE = '/khngldi';
+export const LOGIN_PAGE_ROUTE = '/login';
+export const REGISTER_PAGE_ROUTE = '/register';
+export const ABOUT_PAGE_ROUTE = '/about';
+export const CONTACTS_PAGE_ROUTE = '/contacts';
+export const RULES_PAGE_ROUTE = '/rules';
+export const PRIVACY_PAGE_ROUTE = '/privacy';
+export const CATEGORY_NEWS_PAGE_ROUTE = '/category/:category';
