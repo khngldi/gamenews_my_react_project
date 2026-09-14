@@ -7,7 +7,9 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const port = 2000;
 
-const MONGO_URL = 'mongodb://172.30.209.223:27017/auth';
+// Set MONGO_URL in the environment for the machine where MongoDB is running.
+// The old hard-coded address is not reachable from most development machines.
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/auth';
 const JWT_SECRET = "my_super_secret_key_2025";
 
 const User = require('./models/User');
@@ -22,7 +24,12 @@ const auth = require('./middleware/auth');
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(MONGO_URL)
+// Do not keep HTTP requests buffered while MongoDB is offline. This makes the
+// actual database problem visible immediately instead of looking like a
+// frontend news-loading failure after a long timeout.
+mongoose.set('bufferCommands', false);
+
+mongoose.connect(MONGO_URL, { serverSelectionTimeoutMS: 5000 })
     .then(() => console.log("Connected to MongoDB"))
     .catch(err => console.log("Error connecting:", err));
 

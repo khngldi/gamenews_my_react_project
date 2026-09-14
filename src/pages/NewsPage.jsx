@@ -22,7 +22,7 @@ export function NewsPage() {
                 setArticle(newsRes.data);
 
                 const commentsRes = await axios.get(
-                    `http://localhost:2000/api/comments?post_id=${id}`
+                    `http://localhost:2000/api/comments?postId=${encodeURIComponent(id)}`
                 );
                 setComments(
                     Array.isArray(commentsRes.data)

@@ -1,5 +1,34 @@
 # React + Vite
 
+## Запуск проекта
+
+Установите зависимости фронтенда и backend (`npm install` в корне и `npm install` в `backend`).
+Затем запустите API командой `npm run backend`, а в отдельном терминале — `npm run dev`.
+
+Перед запуском API задайте адрес доступной MongoDB:
+
+```powershell
+$env:MONGO_URL = "mongodb://127.0.0.1:27017/auth"
+```
+
+Если MongoDB находится на другом компьютере, укажите его адрес вместо `127.0.0.1`.
+
+Сайт читает данные через `http://localhost:2000/api` из MongoDB (база `auth`).
+Mokky.dev используется только как источник для ручного импорта; автоматической синхронизации нет.
+Если база пустая, загрузите начальные данные (Node.js 20.19+ или 22.12+):
+
+```powershell
+npm --prefix backend run import
+```
+
+Импорт проверяет все данные перед записью и добавляет только отсутствующие `id`.
+Существующие записи не удаляются и не обновляются. Для API и импорта используйте
+одинаковый `MONGO_URL` в терминалах. Адрес источника можно задать через `MOKKY_URL`.
+
+Проверка: `http://localhost:2000/api/news` должен возвращать массив новостей.
+Ошибка соединения означает, что API не запущен; пустой массив — что в выбранной
+базе нет новостей. Работающий Mokky.dev сам по себе не заполняет MongoDB.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
